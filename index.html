@@ -30,7 +30,7 @@
        background-image: url("./alps.jpg");
    }
 
-h1, h3{
+h1, h5, label{
    background-color: antiquewhite;
 }
 
@@ -42,18 +42,26 @@ h1, h3{
     <button data-animal="music">Doorbells and SleighBells</button>
     <button data-animal="food">Crisp Apple Strudel</button>
     
-    <div id="gifs-appear-here">
 
-
-        <h3>What are your favorite things? Check out their gifs!</h3>
-    
-    <div class="active-green-3 active-green-4 mb-4">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+<div class="col-sm-3">
+    <form id="gifsHere">
+            <h5>What are your favorite things? Check out their gifs!</h5>
+            <div class="form-group">
+                <label for="action-input">Add your favorite things below!</label>
+                <input type="text" id="action-input">
+                </div>
+                <input id="addGif" type="submit" value="Add your fave" class="btn btn-primary">
+                <input id="removeGif" type="submit" value="remove action" class="btn btn-primary">
+            </form>
+         </div>
     </div>
     
+    
+    
 
 
-         <div id="new-buttons"></div>
+       
 
     </body>
 </html>
+

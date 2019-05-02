@@ -42,12 +42,59 @@ $("button").on("click", function() {
     });   
 });
 
-// $(document).ready(function(){
+function addNewButton(){
+    $("#addGif").on("click", function(){
+    var action = $("#action-input").val().trim();
+    
+    if (action == ""){
+      return false; 
+    }
+    actions.push(action);
 
-//     var object;
 
-//   $("input")
-//       var value =(this).val();
-//       $("input").text(value);
-//   })
-  
+    displayGifButtons();
+    return false;
+    });
+}
+
+function displayGifs(){
+    var action = $(this).attr("data-name");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +  + "&api_key=dc6zaTOxFJmzC&limit=10";
+    console.log(queryURL); // displays the constructed url
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    })
+    .done(function(response) {
+        console.log(response); // console test to make sure something returns
+        $("#gifsView").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
+        var results = response.data; //shows results of gifs
+        if (results == ""){
+          alert("There isn't a gif for this selected button");
+        }
+        for (var i=0; i<results.length; i++){
+
+
+     var gifDiv = $("<div>"); //div for the gifs to go inside
+
+      gifDiv.addClass("gifDiv");
+
+ // pulling rating of gif
+    
+ var gifRating = $("<p>").text("Rating: " + results[i].rating);
+          
+ gifDiv.append(gifRating);
+         
+ // pulling gif
+    var gifImage = $("<img>");
+            
+    gifImage.attr("data-animate",results[i].images.fixed_height_small.url); // animated image
+          
+   gifImage.addClass("image");
+          
+    gifDiv.append(gifImage);
+          
+   $("#gifsView").prepend(gifDiv);
+        }
+    });
+}
