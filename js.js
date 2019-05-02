@@ -42,9 +42,12 @@ $("button").on("click", function() {
     });   
 });
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-    var object;
+//     var object;
 
-  $("form-control").on("input", function(){
-      object = $(this)  
+//   $("input")
+//       var value =(this).val();
+//       $("input").text(value);
+//   })
+  
