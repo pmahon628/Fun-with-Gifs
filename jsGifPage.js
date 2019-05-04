@@ -5,9 +5,7 @@
 // Do this over and over and over and over. And then one more time for good measure
 //inline block attr for gifs instead of block so they are next to eachother
 
-$(document).ready(function() {
-    
-    var animal;
+var animal = ["dog", "music", "food"];
 
 $("button").on("click", function() {
     event.preventDefault();
@@ -15,7 +13,9 @@ $("button").on("click", function() {
      console.log(animal);
 });
 
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
+$(document).ready(function(){ 
+    
+var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
     animal + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
 
     $.ajax({
@@ -42,52 +42,54 @@ $("button").on("click", function() {
     $("#gifs-appear-here").prepend(gifsDiv);
     }
     });   
-});
+
 
 //new buttons to show up on screen.
 
-function addNewButton(){
-    $("#addGif").on("click", function(){
+   var fave = "";
+   var action = "";
 
-    event.preventDefault();
+     $("#addGif").on("click", function(){
+         
+     event.preventDefault();
 
-    var fave = $("#fave-input").val().trim();
-
-    if (fave == ""){
+     fave = $("#fave-input").val().trim();
+    
+     if (fave == ""){
       return false; 
     }
-    actions.push(action);
+    action.push(fave);
 
     displayGifButtons();
     return false;
     });
-}
+
 //meant to go through topics and show buttons in "gifsview"
 function displayButtons() {
 
     $("gifsView").empty();
 
-    for (var i = 0; i < topics.length; i++) {
+    for (var i = 0; i < fave.length; i++) {
 
-      var a = $('<button class="btn btn-primary">');
+      var a = $('<button class="btn btn-secondary>');
 
       a.attr("id", "show");
 
-      a.attr("data-search", topics[i]);
+      a.attr("data-search", fave[i]);
 
-      a.text(topics[i]);
+      a.text(fave[i]);
 
       $("#gifsView").append(a);
     }
   }
 
-function displayGifs(){
-    var fave = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + fave + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
-    console.log(queryURL);
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
+// function displayGifs(){
+//     var fave = $(this).attr("data-name");
+//     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + fave + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
+//     console.log(queryURL);
+//     $.ajax({
+//         url: queryURL,
+//         method: 'GET'
     })
     .done(function(response) {
         console.log(response); // console test to make sure something returns
@@ -105,7 +107,7 @@ function displayGifs(){
 
     var gifRating = $("<p>").text("Rating: " + results[i].rating);
           
-    gifDiv.append(gifRating);
+    gifDiv.appendTo(gifRating);
          
     var gifImage = $("<img>");
             
@@ -113,10 +115,11 @@ function displayGifs(){
           
    gifImage.addClass("image");
           
-    gifDiv.append(gifImage);
+    gifDiv.appendTo(gifImage);
           
-   $("#gifsView").prepend(gifDiv);
+   $("#gifsView").prependTo(gifDiv);
         }
     });
-}
+
+
 
