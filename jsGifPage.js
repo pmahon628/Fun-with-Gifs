@@ -3,12 +3,14 @@
 // Listen for events - Click I.e. - onKeyUp
 // Do stuff - Action 
 // Do this over and over and over and over. And then one more time for good measure
+//inline block attr for gifs instead of block so they are next to eachother
 
 $(document).ready(function() {
     
     var animal;
 
 $("button").on("click", function() {
+    event.preventDefault();
      animal = $(this).attr("data-animal");    
      console.log(animal);
 });
@@ -31,7 +33,7 @@ $("button").on("click", function() {
 
     var gifsDiv = $("<div>");
 
-     var favesImage = $("<img>");
+    var favesImage = $("<img>");
 
     favesImage.attr("src", results[i].images.fixed_height.url);
 
@@ -42,25 +44,47 @@ $("button").on("click", function() {
     });   
 });
 
+//new buttons to show up on screen.
+
 function addNewButton(){
     $("#addGif").on("click", function(){
-    var action = $("#action-input").val().trim();
-    
-    if (action == ""){
+
+    event.preventDefault();
+
+    var fave = $("#fave-input").val().trim();
+
+    if (fave == ""){
       return false; 
     }
     actions.push(action);
-
 
     displayGifButtons();
     return false;
     });
 }
+//meant to go through topics and show buttons in "gifsview"
+function displayButtons() {
+
+    $("gifsView").empty();
+
+    for (var i = 0; i < topics.length; i++) {
+
+      var a = $('<button class="btn btn-primary">');
+
+      a.attr("id", "show");
+
+      a.attr("data-search", topics[i]);
+
+      a.text(topics[i]);
+
+      $("#gifsView").append(a);
+    }
+  }
 
 function displayGifs(){
-    var action = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +  + "&api_key=dc6zaTOxFJmzC&limit=10";
-    console.log(queryURL); // displays the constructed url
+    var fave = $(this).attr("data-name");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + fave + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
+    console.log(queryURL);
     $.ajax({
         url: queryURL,
         method: 'GET'
@@ -77,18 +101,15 @@ function displayGifs(){
 
      var gifDiv = $("<div>"); //div for the gifs to go inside
 
-      gifDiv.addClass("gifDiv");
+    gifDiv.addClass("gifDiv");
 
- // pulling rating of gif
-    
- var gifRating = $("<p>").text("Rating: " + results[i].rating);
+    var gifRating = $("<p>").text("Rating: " + results[i].rating);
           
- gifDiv.append(gifRating);
+    gifDiv.append(gifRating);
          
- // pulling gif
     var gifImage = $("<img>");
             
-    gifImage.attr("data-animate",results[i].images.fixed_height_small.url); // animated image
+    gifImage.attr("data-animate",results[i].images.fixed_height_small.url); 
           
    gifImage.addClass("image");
           
@@ -98,3 +119,4 @@ function displayGifs(){
         }
     });
 }
+
