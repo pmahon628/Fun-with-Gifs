@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+
+    <!-- PSEUDOCODE -->
+    <!-- make the whole thing sound of music themed -->
+    <!-- Buttons on HTML -->
+    <!-- form on html to enter searches..bootstrap? -->
+    <!-- Set up API calls on JS so stuff actually pulls through -->
+    <!-- console log everything to make sure it all works -->
+
+
+
+</head>
+<style>
+
+  .form-control {
+    margin: 15px;
+    padding: 15px;
+   }
+
+   body {
+       background-image: url("./alps.jpg");
+       -webkit-background-size: cover;
+       -moz-background-size: cover;
+       background-size: cover;
+   }
+
+h1, h5, label{
+   background-color: antiquewhite;
+  
+}
+h6{
+    
+}
+
+button { 
+    margin: 10px;
+}
+
+.data-animal {
+    display: inline-block;
+}
+
+</Style>
+<body>
+    <h1>What are your favorite things?</h1>
+
+    <h6>The below is an example of mine, check it out and then enter your
+        favorties below.  Enjoy!
+    </h6>
+
+    <button data-animal="dog">Whiskers on puppies</button>
+    <!-- <button data-animal="music">Doorbells and SleighBells</button>
+    <button data-animal="food">Crisp Apple Strudel</button> -->
+
+    <div id="gifs-appear-here"></div>
+    
+<div class="col-sm-3">
+    <form id="gifsHere">
+            <h5>What are your favorite things? Check out their gifs!</h5>
+            <div class="form-group">
+                <label>Add your favorite things below!</label>
+                <input type="text" id="fave-input">
+                </div>
+                <button id="addGif" class="btn btn-secondary">add your favorites</button>
+                <button id="removeGif" type="submit" value="remove action" class="btn btn-secondary">remove the last entry</button>
+            </form>
+         </div>
+    </div>
+          <div id="gifsView"></div>
+    
+          <script src="jsGifPage.js"></script>
+    </body>
+</html>
+

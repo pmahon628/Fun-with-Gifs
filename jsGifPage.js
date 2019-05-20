@@ -5,7 +5,10 @@
 // Do this over and over and over and over. And then one more time for good measure
 //inline block attr for gifs instead of block so they are next to eachother
 
-var animal = ["dog", "music", "food"];
+
+$(document).ready(function(){ 
+
+var animal = "dog";
 
 $("button").on("click", function() {
     event.preventDefault();
@@ -13,8 +16,7 @@ $("button").on("click", function() {
      console.log(animal);
 });
 
-$(document).ready(function(){ 
-    
+var request = $(this).attr("data-name"); 
 var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
     animal + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
 
@@ -26,7 +28,8 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
     .then(function(response){
         console.log(queryURL);
         console.log(response);
-    
+
+   
     var results = response.data;
 
     for (var i = 0; i < results.length; i++) {
@@ -46,10 +49,18 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
 
 //new buttons to show up on screen.
 
-   var fave = "";
-   var action = "";
+   var fave;
+   var action;
 
      $("#addGif").on("click", function(){
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
+    fave + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
+
+    $.ajax({
+    url: queryURL,
+    method: "GET",
+    })
          
      event.preventDefault();
 
@@ -91,7 +102,7 @@ function displayButtons() {
 //         url: queryURL,
 //         method: 'GET'
     })
-    .done(function(response) {
+    (function(response) {
         console.log(response); // console test to make sure something returns
         $("#gifsView").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
         var results = response.data; //shows results of gifs
