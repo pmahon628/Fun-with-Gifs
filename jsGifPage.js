@@ -8,7 +8,9 @@
 
 $(document).ready(function(){ 
 
-var animal = "dog";
+var animal = ;
+var apiKey = "ONPUIGAU3VNI";
+var searchTerm  = "dog";
 
 $("button").on("click", function() {
     event.preventDefault();
@@ -17,8 +19,10 @@ $("button").on("click", function() {
 });
 
 var request = $(this).attr("data-name"); 
-var queryURL = "https://api.giphy.com/v1/gifs/search?q="  +
-    animal + "&api_key=tR2p1rGStRu3kI4VUov20ZukpGnuDh4B&limit=10";
+var search_url = "https://api.tenor.com/v1/search?tag=" + search_term + "&key=" +
+apiKey + "&limit=" + lmt;
+
+httpGetAsync(search_url,tenorCallback_search);
 
     $.ajax({
     url: queryURL,
@@ -132,5 +136,41 @@ function displayButtons() {
         }
     });
 
+// url Async requesting function
+function httpGetAsync(theUrl, callback)
+{
+// create the request object
+  var xmlHttp = new XMLHttpRequest();
+// set the state change callback to capture when the response comes in
+    xmlHttp.onreadystatechange = function()
+    {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        {
+            callback(xmlHttp.responseText);
+        }
+    }
+     // open as a GET call, pass in the url and set async = True
+    xmlHttp.open("GET", theUrl, true);
+ // call send with no params as they were passed in on the url string
+    xmlHttp.send(null);
+return;
+}
 
+// callback for the top 8 GIFs of search
+function tenorCallback_search(responsetext)
+{
+    // parse the json response
+    var response_objects = JSON.parse(responsetext);
+
+    top_10_gifs = response_objects["results"];
+
+    // load the GIFs -- for our example we will load the first GIFs preview size (nanogif) and share size (tinygif)
+
+    document.getElementById("preview_gif").src = top_10_gifs[0]["media"][0]["nanogif"]["url"];
+
+    document.getElementById("share_gif").src = top_10_gifs[0]["media"][0]["tinygif"]["url"];
+
+    return;
+
+}
 
